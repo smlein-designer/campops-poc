@@ -1,0 +1,127 @@
+/* CampOps design tokens — replace shadcn's generated defaults with this block */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Public+Sans:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+:root {
+  /* Surfaces */
+  --background: #FAF8F5;
+  --foreground: #111827;
+  --card: #FFFFFF;
+  --card-foreground: #111827;
+  --muted: #F9FAFB;
+  --muted-foreground: #6B7280;
+
+  /* Primary — Trees */
+  --primary: #4C7A3A;
+  --primary-foreground: #FFFFFF;
+  --primary-hover: #3D6530;
+  --primary-active: #2F4F25;
+
+  /* Secondary — Earth tint */
+  --secondary: #F3ECE4;
+  --secondary-foreground: #111827;
+
+  /* Accent — Sky tint */
+  --accent: #E8F1F6;
+  --accent-foreground: #111827;
+
+  /* Status */
+  --destructive: #DC2626;
+  --destructive-foreground: #FFFFFF;
+  --destructive-soft: #FEF2F2;
+
+  --warning: #B45309;
+  --warning-foreground: #FFFFFF;
+  --warning-soft: #FFFBEB;
+
+  --success: #0C6B52;
+  --success-foreground: #FFFFFF;
+  --success-soft: #F0FDF4;
+
+  --neutral-soft: #F3F4F6;
+
+  /* Borders, focus */
+  --border: #D1D5DB;
+  --input: #D1D5DB;
+  --ring: #16324A;
+
+  /* Link — Water. No shadcn equivalent; kept distinct so links never collide
+     visually with primary (Trees), same reasoning as the badge/button
+     collision this was built to avoid in Figma. */
+  --link: #16324A;
+
+  /* Radius */
+  --radius: 0.5rem;
+  --radius-sm: 0.25rem;
+  --radius-full: 9999px;
+
+  /* Type */
+  --font-display: 'Fraunces', serif;
+  --font-body: 'Public Sans', sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --display-sm: 1.5rem;
+  --display-md: 2rem;
+  --display-lg: 3rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-soft: var(--destructive-soft);
+
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-soft: var(--warning-soft);
+
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-soft: var(--success-soft);
+
+  --color-neutral-soft: var(--neutral-soft);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-link: var(--link);
+
+  --radius-DEFAULT: var(--radius);
+  --radius-sm: var(--radius-sm);
+  --radius-full: var(--radius-full);
+
+  --font-family-display: var(--font-display);
+  --font-family-body: var(--font-body);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
