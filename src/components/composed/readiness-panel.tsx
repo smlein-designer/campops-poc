@@ -2,6 +2,7 @@ import {
   ReadinessItem,
   type ReadinessSeverity,
 } from "@/components/composed/readiness-item"
+import { Typography } from "@/components/ui/typography"
 import { cn } from "@/lib/utils"
 
 type ReadinessStatus = "incomplete" | "ready-with-warnings" | "ready"
@@ -28,11 +29,13 @@ function ReadinessPanel({ status, issues, className }: ReadinessPanelProps) {
         className
       )}
     >
-      <h2 className="w-full text-lg font-semibold text-foreground">Publish readiness</h2>
+      <Typography variant="heading-h4" as="h2" className="w-full">
+        Publish readiness
+      </Typography>
       {status === "ready" ? (
-        <p className="text-sm text-muted-foreground">
+        <Typography variant="body-sm" className="text-muted-foreground">
           No issues found. This campsite is ready to publish.
-        </p>
+        </Typography>
       ) : (
         issues.map((issue) => (
           <ReadinessItem

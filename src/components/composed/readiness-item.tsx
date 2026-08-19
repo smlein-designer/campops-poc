@@ -1,4 +1,5 @@
 import { Badge } from "@/components/ui/badge"
+import { Typography } from "@/components/ui/typography"
 import { cn } from "@/lib/utils"
 
 type ReadinessSeverity = "blocking" | "warning"
@@ -33,8 +34,10 @@ function ReadinessItem({ severity, message, field, className }: ReadinessItemPro
         {label}
       </Badge>
       <div className="flex flex-1 flex-col gap-1">
-        <p className="text-sm text-foreground">{message}</p>
-        <p className="text-xs text-muted-foreground">{field}</p>
+        <Typography variant="body-sm">{message}</Typography>
+        <Typography variant="caption" className="text-muted-foreground">
+          {field}
+        </Typography>
       </div>
     </div>
   )

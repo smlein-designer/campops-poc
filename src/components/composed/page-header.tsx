@@ -2,6 +2,7 @@ import * as React from "react"
 import { ArrowLeft } from "lucide-react"
 
 import { Badge, type badgeVariants } from "@/components/ui/badge"
+import { Typography } from "@/components/ui/typography"
 import { cn } from "@/lib/utils"
 import type { VariantProps } from "class-variance-authority"
 
@@ -28,21 +29,21 @@ function PageHeader({
   return (
     <div
       data-slot="page-header"
-      className={cn("flex items-center justify-between gap-4", className)}
+      className={cn("flex items-end justify-between gap-4", className)}
     >
       <div className="flex flex-col items-start gap-1">
         <button
           type="button"
           onClick={onBreadcrumbClick}
-          className="inline-flex w-fit items-center gap-1 text-xs text-link hover:underline"
+          className="inline-flex w-fit items-center gap-1 text-xs leading-[1.4] text-link hover:underline"
         >
           <ArrowLeft className="size-3.5" aria-hidden="true" />
           {breadcrumbLabel}
         </button>
         <div className="flex items-center gap-2">
-          <h1 className="font-display text-[length:var(--display-sm)] font-semibold text-foreground">
+          <Typography variant="display-h2" as="h1">
             {title}
-          </h1>
+          </Typography>
           {status && <Badge variant={status.variant}>{status.label}</Badge>}
         </div>
       </div>

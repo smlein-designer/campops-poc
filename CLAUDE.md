@@ -18,25 +18,20 @@ You're building a production-shaped React vertical slice of CampOps, a campgroun
 5. **Replace the generated CSS variables** in your global stylesheet with the exact block in `globals.css` below. This is the whole point, don't let shadcn's default gray/black theme survive, replace it with CampOps's real values immediately after scaffolding, before building anything else.
 6. Set up the font imports: Fraunces (display) and Public Sans (body) from Google Fonts, or self-hosted if you prefer.
 
-## Component build order
+## Source of truth
 
-Build in this order, each one is a real shadcn component with only its *colors* changed, not its structure or behavior:
+- **Design system**: Figma file `uV8nvy1rALWKVadZL9lP64` ("CampOps — DS")
+- **Screens**: Figma file `sjv7WBAZEkmHuExwkeGTdV` ("CampOps — Pages")
+- **Component contracts, tokens, typography, and Figma-to-code naming conventions**: `DESIGN_SYSTEM.md`
+- **Deviations, judgment calls, and bug fixes made along the way**: `CORRECTIONS.md`
 
-1. **Button** — variants: `default` (primary), `secondary`, `outline`, `destructive`. No size variants needed.
-2. **Input** — no built-in label. Compose a `FieldGroup` wrapper (label + Input + optional helper/error text) as you build it, you'll reuse this constantly.
-3. **Badge** — shadcn's default variants don't include severity colors. Extend the base Badge with `warning` and `success` variants using `class-variance-authority`, the same pattern shadcn's own docs use for custom colors. Four variants total: `destructive` (blocking), `warning` (advisory), `success` (ready), `secondary` (neutral).
-4. **Select** — no built-in label, same `FieldGroup` composition pattern as Input.
-5. **Checkbox** — no built-in label either. Compose with a sibling label at point of use (a `CheckboxRow` pattern), don't build a label into the primitive itself.
+## Build order & workflow
 
-Then the three CampOps-specific compositions, built from the primitives above, not from shadcn (shadcn has no equivalent for these):
-
-6. **ReadinessItem** — composes a `Badge` + message text + affected-field label. Non-interactive.
-7. **ReadinessPanel** — composes a list of `ReadinessItem`s. Three states: `incomplete`, `ready-with-warnings`, `ready`. All three share the same white/card background, don't tint the warning state, that was a deliberate reversal in the design pass, tinting it yellow implied "don't proceed" when warnings don't block publishing.
-8. **PageHeader** — breadcrumb link (styled with the `link` token, not `primary`) with a back arrow icon, page title, optional status Badge, and 1-2 action Buttons.
+Primitives first (Button, Input, Badge, Select, Checkbox, plus their `FieldGroup`/`CheckboxRow` compositions), then the three CampOps-specific compositions (`ReadinessItem`, `ReadinessPanel`, `PageHeader`), then screen assembly. The full component-by-component contract — variants, states, composition rules — lives in `DESIGN_SYSTEM.md`, not here.
 
 ## Screens to assemble
 
-Five screens, matching the object model's Campsite.publishStatus states:
+Five screens, matching the object model's `Campsite.publishStatus` states:
 
 1. Campsite editor, missing information (a blocking issue present, Publish disabled)
 2. Campsite editor, ready with warnings (blocking issue resolved, one advisory warning remains, Publish enabled)
@@ -46,25 +41,11 @@ Five screens, matching the object model's Campsite.publishStatus states:
 
 ## Mock data
 
-One `Campsite` object matching the object model's attributes: `siteNumberOrName`, `siteType`, `capacity`, `maxVehicleLength`, `checkInTime`, `checkOutTime`, `bookingSeason`, `amenities` (with `publiclyVisible` per amenity), `photos`, `publishStatus`. Derive each screen's `ValidationIssue[]` from this same object rather than hardcoding issue lists per screen, that's the actual object-model relationship and it's worth keeping honest in code too.
-
-## Validation issues, exact copy
-
-Pull these verbatim from the readiness table, don't paraphrase:
-
-| Field | Severity | Message |
-|---|---|---|
-| siteNumberOrName | Blocking | Add a site number or name so operators and campers can identify this site. |
-| siteType | Blocking | Select a site type (tent, RV, cabin, etc.) so campers know what to expect. |
-| capacity | Blocking | Add a capacity so campers know how many people or vehicles this site fits. |
-| maxVehicleLength (RV only) | Blocking | Add a max vehicle length so RV campers know whether this site fits their vehicle. |
-| photos | Warning | Add photos when available. Listings with photos are easier for campers to trust. |
-| checkInTime | Warning | Add a check-in time so campers know when they can arrive. |
-| checkOutTime | Warning | Add a check-out time so campers know when they need to leave. |
+One `Campsite` object matching the object model's attributes: `siteNumberOrName`, `siteType`, `capacity`, `maxVehicleLength`, `checkInTime`, `checkOutTime`, `bookingSeason`, `amenities` (with `publiclyVisible` per amenity), `photos`, `publishStatus`. Derive each screen's `ValidationIssue[]` from this same object rather than hardcoding issue lists per screen, that's the actual object-model relationship and it's worth keeping honest in code too. Exact validation-message copy is in `DESIGN_SYSTEM.md`.
 
 ## Rules
 
-1. Every color, spacing, and radius value comes from a CSS variable. No hardcoded hex codes or pixel values in component files.
-2. Match Figma property names to code prop names as documented in the component contracts, `Variant=Outline` is `variant="outline"`, not `variant="secondary"`.
-3. Don't invent props or states that aren't in the contracts. If something's missing, flag it rather than guessing.
-4. Keep a running note of anywhere you had to deviate from the Figma spec or make a judgment call, this feeds back into the project's corrections log.
+1. Before implementing anything derived from Figma — a component, a screen, a piece of text — inspect the actual node (`get_design_context`) rather than working from memory or a similar-looking existing pattern. Don't invent props or states that aren't in the contracts; flag what's missing rather than guessing.
+2. Prefer reusing an existing component (a primitive, a composition, `Typography`) over hand-rolling styles inline. Check `DESIGN_SYSTEM.md` for the current component/token contract before adding anything new.
+3. Consult `DESIGN_SYSTEM.md` before implementing or modifying anything Figma-derived — components, tokens, typography, naming.
+4. Consult `CORRECTIONS.md` before re-deciding something already resolved, and keep it updated: log every deviation from the Figma spec, judgment call, or bug fix as you go, this feeds back into the project's corrections log.

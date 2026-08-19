@@ -34,7 +34,7 @@ function PublishedSuccess() {
       <div className="flex w-full flex-col gap-4 rounded-lg border border-border bg-card p-6">
         <div className="flex items-center gap-2">
           <CircleCheck className="size-[22px] text-success" aria-hidden="true" />
-          <h1 className="text-xl font-semibold text-foreground">
+          <h1 className="text-xl leading-normal font-semibold text-foreground">
             Campsite published successfully
           </h1>
         </div>

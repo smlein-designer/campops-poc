@@ -21,8 +21,8 @@ function CampsiteEditorForm({ campsite, issues }: CampsiteEditorFormProps) {
   return (
     <>
       <section className="flex w-full flex-col gap-4">
-        <h2 className="text-lg font-semibold text-foreground">Campsite details</h2>
-        <div className="flex gap-4">
+        <h2 className="text-lg leading-[1.35] font-semibold text-foreground">Campsite details</h2>
+        <div className="flex items-start gap-4">
           <FieldGroup label="Site number or name" htmlFor="site-name" className="w-[280px]">
             <Input id="site-name" defaultValue={campsite.siteNumberOrName} />
           </FieldGroup>
@@ -39,7 +39,7 @@ function CampsiteEditorForm({ campsite, issues }: CampsiteEditorFormProps) {
             </Select>
           </FieldGroup>
         </div>
-        <div className="flex gap-4">
+        <div className="flex items-start gap-4">
           <FieldGroup
             label="Capacity"
             htmlFor="capacity"
@@ -65,7 +65,7 @@ function CampsiteEditorForm({ campsite, issues }: CampsiteEditorFormProps) {
       </section>
 
       <section className="flex w-full flex-col gap-4">
-        <h2 className="text-lg font-semibold text-foreground">Amenities</h2>
+        <h2 className="text-lg leading-[1.35] font-semibold text-foreground">Amenities</h2>
         <div className="flex flex-wrap gap-6">
           {campsite.amenities.map((amenity) => (
             <CheckboxRow
@@ -79,8 +79,10 @@ function CampsiteEditorForm({ campsite, issues }: CampsiteEditorFormProps) {
       </section>
 
       <section className="flex w-full flex-col gap-4">
-        <h2 className="text-lg font-semibold text-foreground">Availability &amp; Restrictions</h2>
-        <div className="flex gap-4">
+        <h2 className="text-lg leading-[1.35] font-semibold text-foreground">
+          Availability &amp; Restrictions
+        </h2>
+        <div className="flex items-start gap-4">
           <FieldGroup label="Booking season" htmlFor="booking-season" className="w-[220px]">
             <Select defaultValue={campsite.bookingSeason}>
               <SelectTrigger id="booking-season" className="w-full">

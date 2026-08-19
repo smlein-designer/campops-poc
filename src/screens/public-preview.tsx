@@ -1,21 +1,8 @@
 import { CalendarDays, CameraOff, Clock9, MapPin, Truck, Users } from "lucide-react"
 
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 import { campsitePublished } from "@/lib/campsite-data"
-
-function Tag({ children, className }: { children: React.ReactNode; className?: string }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground",
-        className
-      )}
-    >
-      {children}
-    </span>
-  )
-}
 
 function PublicPreview() {
   const campsite = campsitePublished
@@ -42,10 +29,10 @@ function PublicPreview() {
         </div>
 
         <div className="flex items-center gap-2">
-          <h1 className="font-display text-2xl font-semibold text-foreground">
+          <h1 className="font-display text-2xl leading-normal font-semibold text-foreground">
             Campsite {campsite.siteNumberOrName}
           </h1>
-          <Tag>{campsite.siteType === "rv" ? "RV site" : campsite.siteType}</Tag>
+          <Badge variant="neutral">{campsite.siteType === "rv" ? "RV site" : campsite.siteType}</Badge>
         </div>
 
         <div className="flex gap-6">
@@ -59,16 +46,18 @@ function PublicPreview() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-foreground">Amenities</h2>
+          <h2 className="text-base leading-normal font-semibold text-foreground">Amenities</h2>
           <div className="flex gap-2">
             {visibleAmenities.map((amenity) => (
-              <Tag key={amenity.id}>{amenity.label}</Tag>
+              <Badge key={amenity.id} variant="neutral">
+                {amenity.label}
+              </Badge>
             ))}
           </div>
         </div>
 
         <div className="flex flex-col gap-2 rounded-lg bg-accent p-4">
-          <h2 className="text-base font-semibold text-foreground">Ready to book?</h2>
+          <h2 className="text-base leading-normal font-semibold text-foreground">Ready to book?</h2>
           <p className="text-[13px] text-muted-foreground">
             This site is available {campsite.bookingSeason}. Select your dates to check
             availability.
@@ -79,7 +68,7 @@ function PublicPreview() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <h2 className="text-base font-semibold text-foreground">Things to know</h2>
+          <h2 className="text-base leading-normal font-semibold text-foreground">Things to know</h2>
           <div className="flex flex-col gap-1 text-[13px] text-muted-foreground">
             <p>
               • Check-in at {campsite.checkInTime}, check-out by {campsite.checkOutTime}
