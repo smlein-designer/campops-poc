@@ -2,6 +2,7 @@ import { CircleCheck } from "lucide-react"
 
 import { PageHeader } from "@/components/composed/page-header"
 import { Button } from "@/components/ui/button"
+import { Typography } from "@/components/ui/typography"
 import { campsitePublished } from "@/lib/campsite-data"
 
 const summaryRows = (campsite: typeof campsitePublished) => [
@@ -34,9 +35,7 @@ function PublishedSuccess() {
       <div className="flex w-full flex-col gap-4 rounded-lg border border-border bg-card p-6">
         <div className="flex items-center gap-2">
           <CircleCheck className="size-[22px] text-success" aria-hidden="true" />
-          <h1 className="text-xl leading-normal font-semibold text-foreground">
-            Campsite published successfully
-          </h1>
+          <Typography variant="heading-h4">Campsite published successfully</Typography>
         </div>
         <p className="text-sm text-muted-foreground">
           Campsite {campsite.siteNumberOrName} is now live on {campsite.campgroundName}

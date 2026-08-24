@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Typography } from "@/components/ui/typography"
 import type { Campsite, ValidationIssue } from "@/lib/campsite-data"
 
 interface CampsiteEditorFormProps {
@@ -21,22 +22,31 @@ function CampsiteEditorForm({ campsite, issues }: CampsiteEditorFormProps) {
   return (
     <>
       <section className="flex w-full flex-col gap-4">
-        <h2 className="text-lg leading-[1.35] font-semibold text-foreground">Campsite details</h2>
+        <Typography variant="heading-h4">Campsite details</Typography>
         <div className="flex items-start gap-4">
-          <FieldGroup label="Site number or name" htmlFor="site-name" className="w-[280px]">
-            <Input id="site-name" defaultValue={campsite.siteNumberOrName} />
+          <FieldGroup
+            label="Site number or name"
+            htmlFor="site-name"
+            required
+            className="w-[280px]"
+          >
+            {(a11y) => (
+              <Input id="site-name" defaultValue={campsite.siteNumberOrName} {...a11y} />
+            )}
           </FieldGroup>
-          <FieldGroup label="Site type" htmlFor="site-type" className="w-[280px]">
-            <Select defaultValue={campsite.siteType ?? undefined}>
-              <SelectTrigger id="site-type" className="w-full">
-                <SelectValue placeholder="Select a type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="tent">Tent</SelectItem>
-                <SelectItem value="rv">RV site</SelectItem>
-                <SelectItem value="cabin">Cabin</SelectItem>
-              </SelectContent>
-            </Select>
+          <FieldGroup label="Site type" htmlFor="site-type" required className="w-[280px]">
+            {(a11y) => (
+              <Select defaultValue={campsite.siteType ?? undefined}>
+                <SelectTrigger id="site-type" className="w-full" {...a11y}>
+                  <SelectValue placeholder="Select a type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="tent">Tent</SelectItem>
+                  <SelectItem value="rv">RV site</SelectItem>
+                  <SelectItem value="cabin">Cabin</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
           </FieldGroup>
         </div>
         <div className="flex items-start gap-4">
@@ -44,28 +54,39 @@ function CampsiteEditorForm({ campsite, issues }: CampsiteEditorFormProps) {
             label="Capacity"
             htmlFor="capacity"
             helperText="Campers"
+            required
             className="w-[280px]"
           >
-            <Input id="capacity" type="number" defaultValue={campsite.capacity ?? ""} />
+            {(a11y) => (
+              <Input
+                id="capacity"
+                type="number"
+                defaultValue={campsite.capacity ?? ""}
+                {...a11y}
+              />
+            )}
           </FieldGroup>
           <FieldGroup
             label="Max vehicle length"
             htmlFor="max-vehicle-length"
             error={maxVehicleLengthError?.message}
+            required={campsite.siteType === "rv"}
             className="w-[280px]"
           >
-            <Input
-              id="max-vehicle-length"
-              type="number"
-              aria-invalid={!!maxVehicleLengthError}
-              defaultValue={campsite.maxVehicleLength ?? ""}
-            />
+            {(a11y) => (
+              <Input
+                id="max-vehicle-length"
+                type="number"
+                defaultValue={campsite.maxVehicleLength ?? ""}
+                {...a11y}
+              />
+            )}
           </FieldGroup>
         </div>
       </section>
 
       <section className="flex w-full flex-col gap-4">
-        <h2 className="text-lg leading-[1.35] font-semibold text-foreground">Amenities</h2>
+        <Typography variant="heading-h4">Amenities</Typography>
         <div className="flex flex-wrap gap-6">
           {campsite.amenities.map((amenity) => (
             <CheckboxRow
@@ -79,27 +100,30 @@ function CampsiteEditorForm({ campsite, issues }: CampsiteEditorFormProps) {
       </section>
 
       <section className="flex w-full flex-col gap-4">
-        <h2 className="text-lg leading-[1.35] font-semibold text-foreground">
-          Availability &amp; Restrictions
-        </h2>
+        <Typography variant="heading-h4">Availability &amp; Restrictions</Typography>
         <div className="flex items-start gap-4">
-          <FieldGroup label="Booking season" htmlFor="booking-season" className="w-[220px]">
-            <Select defaultValue={campsite.bookingSeason}>
-              <SelectTrigger id="booking-season" className="w-full">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value={campsite.bookingSeason}>{campsite.bookingSeason}</SelectItem>
-              </SelectContent>
-            </Select>
+          <FieldGroup label="Booking season" htmlFor="booking-season" required className="w-[220px]">
+            {(a11y) => (
+              <Select defaultValue={campsite.bookingSeason}>
+                <SelectTrigger id="booking-season" className="w-full" {...a11y}>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={campsite.bookingSeason}>{campsite.bookingSeason}</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
           </FieldGroup>
-          <FieldGroup label="Check-in time" htmlFor="check-in" className="w-[220px]">
-            <Input id="check-in" defaultValue={campsite.checkInTime} />
+          <FieldGroup label="Check-in time" htmlFor="check-in" required className="w-[220px]">
+            {(a11y) => <Input id="check-in" defaultValue={campsite.checkInTime} {...a11y} />}
           </FieldGroup>
-          <FieldGroup label="Check-out time" htmlFor="check-out" className="w-[220px]">
-            <Input id="check-out" defaultValue={campsite.checkOutTime} />
+          <FieldGroup label="Check-out time" htmlFor="check-out" required className="w-[220px]">
+            {(a11y) => <Input id="check-out" defaultValue={campsite.checkOutTime} {...a11y} />}
           </FieldGroup>
         </div>
+        <Typography variant="caption" className="text-muted-foreground">
+          * Required
+        </Typography>
       </section>
     </>
   )

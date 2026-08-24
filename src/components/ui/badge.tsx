@@ -19,7 +19,7 @@ const badgeVariants = cva(
         success:
           "border-success bg-success-soft text-success [a]:hover:bg-success-soft/80",
         neutral:
-          "border-muted-foreground bg-muted text-muted-foreground [a]:hover:bg-muted/80",
+          "border-neutral bg-neutral-soft text-neutral [a]:hover:bg-neutral-soft/80",
       },
     },
     defaultVariants: {

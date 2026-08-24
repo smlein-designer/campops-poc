@@ -29,7 +29,7 @@ function ReadinessPanel({ status, issues, className }: ReadinessPanelProps) {
         className
       )}
     >
-      <Typography variant="heading-h4" as="h2" className="w-full">
+      <Typography variant="heading-h4" className="w-full">
         Publish readiness
       </Typography>
       {status === "ready" ? (

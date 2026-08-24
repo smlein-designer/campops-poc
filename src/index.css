@@ -11,6 +11,7 @@
   --card-foreground: #111827;
   --muted: #F9FAFB;
   --muted-foreground: #6B7280;
+  --muted-midground: #374151;
 
   /* Primary — Trees */
   --primary: #4C7A3A;
@@ -27,7 +28,7 @@
   --accent-foreground: #111827;
 
   /* Status */
-  --destructive: #DC2626;
+  --destructive: #B21D1D;
   --destructive-foreground: #FFFFFF;
   --destructive-soft: #FEF2F2;
 
@@ -39,11 +40,12 @@
   --success-foreground: #FFFFFF;
   --success-soft: #F0FDF4;
 
+  --neutral: #374151;
   --neutral-soft: #F3F4F6;
 
   /* Borders, focus */
-  --border: #D1D5DB;
-  --input: #D1D5DB;
+  --border: #8994A3;
+  --input: var(--border);
   --ring: #16324A;
 
   /* Link — Water. No shadcn equivalent; kept distinct so links never collide
@@ -76,6 +78,7 @@
   --color-card-foreground: var(--card-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-muted-midground: var(--muted-midground);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -100,6 +103,7 @@
   --color-success-foreground: var(--success-foreground);
   --color-success-soft: var(--success-soft);
 
+  --color-neutral: var(--neutral);
   --color-neutral-soft: var(--neutral-soft);
 
   --color-border: var(--border);

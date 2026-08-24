@@ -31,12 +31,10 @@ const typographyVariants = cva("text-foreground", {
 
 type TypographyVariant = NonNullable<VariantProps<typeof typographyVariants>["variant"]>
 
-// The element each variant renders as when `as` isn't passed. This is a starting
-// point, not a rule: which rung a piece of text is styled as (visual) and which
-// heading level it belongs at in the page outline (structural) are different
-// questions — always pass `as` explicitly when they diverge, e.g. a page's only
-// <h1> styled at "heading-h4" size, or a "display-h3" sitting at <h2> because it's
-// a sibling section, not a subsection.
+// The element each variant renders as — this IS the Figma-to-code tag mapping
+// (Display/H2 -> h2, Heading/H4 -> h4, etc.), not just a convenient default.
+// Don't override via `as` for a document-outline opinion; see DESIGN_SYSTEM.md's
+// Typography section and CORRECTIONS.md item 41 for why that's off-limits here.
 const defaultElement: Record<TypographyVariant, React.ElementType> = {
   "display-hero": "h1",
   "display-h2": "h2",

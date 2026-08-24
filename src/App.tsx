@@ -58,20 +58,22 @@ function ComponentShowcase() {
         htmlFor="site-name"
         helperText="Shown to operators and campers."
       >
-        <Input id="site-name" placeholder="e.g. Site 14" />
+        {(a11y) => <Input id="site-name" placeholder="e.g. Site 14" {...a11y} />}
       </FieldGroup>
 
       <FieldGroup label="Site type" htmlFor="site-type" error="Select a site type.">
-        <Select>
-          <SelectTrigger id="site-type" className="w-full">
-            <SelectValue placeholder="Select a type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="tent">Tent</SelectItem>
-            <SelectItem value="rv">RV</SelectItem>
-            <SelectItem value="cabin">Cabin</SelectItem>
-          </SelectContent>
-        </Select>
+        {(a11y) => (
+          <Select>
+            <SelectTrigger id="site-type" className="w-full" {...a11y}>
+              <SelectValue placeholder="Select a type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="tent">Tent</SelectItem>
+              <SelectItem value="rv">RV</SelectItem>
+              <SelectItem value="cabin">Cabin</SelectItem>
+            </SelectContent>
+          </Select>
+        )}
       </FieldGroup>
 
       <CheckboxRow id="publicly-visible" label="Publicly visible" defaultChecked />

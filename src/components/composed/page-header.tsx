@@ -41,9 +41,7 @@ function PageHeader({
           {breadcrumbLabel}
         </button>
         <div className="flex items-center gap-2">
-          <Typography variant="display-h2" as="h1">
-            {title}
-          </Typography>
+          <Typography variant="display-h2">{title}</Typography>
           {status && <Badge variant={status.variant}>{status.label}</Badge>}
         </div>
       </div>
